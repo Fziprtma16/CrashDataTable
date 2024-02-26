@@ -311,6 +311,18 @@ function EditTable(Params){
       var input = document.getElementById(`input${_id}`);
 
         input.addEventListener("keyup", function (event) {
+          if (parameters == "") {
+            if (err)   Swal.fire({
+                title: err,
+                text: "",
+                type: 'Tidak Dapat Mengedit Data !',
+              }).then(function(result) {
+                if (true) {
+                  return false;
+                }
+              });
+              return false;
+          }
             if (event.key === "Enter") {
               event.preventDefault();
               var newData = {};
