@@ -1,4 +1,3 @@
-
 function TableCrash(Params){
   var configParam = {};
   if (Params.ResizeTable) {
