@@ -70,7 +70,7 @@ var tablerrrr = TableCrash({
   ShortTable : true, //SHORT TABLE
   ShortingRow : 1, //SELECT SHORT ROW
   TypeShorting :"asc" //TYPE SHOR , DESC OR ASC
-},{searching:false});
+},{searching:false} //DEFAULT SETTING DataTable);
 ```
 
 ## Edit table
