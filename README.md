@@ -38,19 +38,13 @@ beberapa fitur yang saya sediakan
        </tr>
      </thead>
      <tbody id="IdBody">
-       <?php
-       $qdr =  "SELECT * FROM biodata_company $period";
-        $pasien = mysqli_query($connection,$qdr);
-        while ($data = mysqli_fetch_array($pasien)) {
-        ?>
          <tr>
-           <td alias="KODERK"><? echo  $data['KODERK']; ?></td>
-           <td alias="Company"><?php echo $data['Company']; ?></td>
-           <td alias="ContactPerson"><?= $data['ContactPerson']; ?></td>
-           <td alias="Address"><?php echo $data['Address']; ?></td>
-           <td alias="City"><?php echo $data['City']; ?></td>
+           <td alias="KODERK">0001A</td>
+           <td alias="Company">PT JAYA ABADI</td>
+           <td alias="ContactPerson">FAUZI</td>
+           <td alias="Address">JALAN KEMAN AJA</td>
+           <td alias="City">JAKARTA</td>
          </tr>
-       <?php } ?>
      </tbody>
      <tfoot>
        <th>Kode Id</th>
