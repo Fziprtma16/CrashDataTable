@@ -1,8 +1,15 @@
 function TableCrash(Params,settingData){
   console.log(settingData);
   var configParam = {};
+  var shortData = {};
   if (Params.ResizeTable) {
     ResizeTable(Params.id);
+  }
+  if (Params.ShortTable) {
+    shortData = {
+      "iDisplayLength": -1,
+      "aaSorting": [[ Params.ShortingRow,  Params.TypeShorting ]]
+    }
   }
   if(Params.Excel && Params.SearchFooter){
     configParam = {
@@ -100,11 +107,12 @@ function TableCrash(Params,settingData){
     }
   }
 }
-let combined = { ...configParam, ...settingData };
+let combined = { ...configParam, ...settingData, ...shortData };
 console.log(combined);
 return   $("#"+Params.id).DataTable(combined);
 
 }
+
 function ResizeTable(Id) {
     $("#"+Id+" th").css('cursor','col-resize');
     var pressed = false;
