@@ -82,7 +82,7 @@ var tablerrrr = TableCrash({
 ## Edit table
 
 ```javascript
-vEditTable({
+EditTable({
   id : "ID Table", //ID TABLE
   table : tablerrrr, // VARIABEL DATA TABLE
   row_id : 0, // ROW ID SEBAGAI PARAMETER EDIT
