@@ -1,4 +1,5 @@
-function TableCrash(Params){
+function TableCrash(Params,settingData){
+  console.log(settingData);
   var configParam = {};
   if (Params.ResizeTable) {
     ResizeTable(Params.id);
@@ -99,7 +100,9 @@ function TableCrash(Params){
     }
   }
 }
-return   $("#"+Params.id).DataTable(configParam);
+let combined = { ...configParam, ...settingData };
+console.log(combined);
+return   $("#"+Params.id).DataTable(combined);
 
 }
 function ResizeTable(Id) {
