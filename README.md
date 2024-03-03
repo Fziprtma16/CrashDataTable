@@ -142,14 +142,7 @@ DeleteData({
 
 ## Usage
 
-- Silahkan Masukan CSS yang tersedia di folder "DIST"
-
-- Dan Masukan Script Di Folder "SRC"
-
-
-## Optimizations
-
-What optimizations did you make in your code? E.g. refactors, performance improvements, accessibility
+- Example In `index.html`
 
 
 ## Features Soon
@@ -157,5 +150,4 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 - Add Data
 - Fixed Row
 - Grouping Data
-- Delete Data
 
