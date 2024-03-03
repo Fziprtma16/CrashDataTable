@@ -1,7 +1,13 @@
-function TableCrash(Params,settingData){
+function TableCrash(Params,settingData,AddData){
   console.log(settingData);
+
   var configParam = {};
   var shortData = {};
+  var AddButton = {};
+  var TotalForm = Params.TotalFormadd;
+  var ConfigAddForm = Params.ConfigForm;
+  console.log(ConfigAddForm);
+
   if (Params.ResizeTable) {
     ResizeTable(Params.id);
   }
@@ -11,7 +17,7 @@ function TableCrash(Params,settingData){
       "aaSorting": [[ Params.ShortingRow,  Params.TypeShorting ]]
     }
   }
-  if(Params.Excel && Params.SearchFooter){
+  if(Params.Excel && Params.SearchFooter && Params.ButtonAddData){
     configParam = {
     dom: 'Bfrtip',
     buttons : {
@@ -30,7 +36,58 @@ function TableCrash(Params,settingData){
     excelStyles:{
       template : 'blue_medium'
     }
-  }
+  },
+    {
+      text:'Add Data',
+      className : 'btn btn-outline-primary',
+      action: function ( e, dt, node, config ) {
+        var headerModal = 'Add Data';
+        var valueDetail = '';
+        for (let i = 0; i < TotalForm; i++) {
+          placeholder = ConfigAddForm.Placehorder[i];
+          idForm = ConfigAddForm.id[i];
+          valueDetail = valueDetail +  '<div class="col-lg-12">' +
+          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+'">' +
+          '</div><br> ';
+
+        }
+
+
+        (new Modal(
+          headerModal,            // title
+          valueDetail, // text
+          'Close',              // noBtnName
+          'Confirm',            // yesBtnName
+          ()=>{
+            const formValues = {};
+            const urlEnd  = ConfigAddForm.UrlEndPoint;
+            const urlLoad = ConfigAddForm.urlLoad;
+            const idDiv = ConfigAddForm.idDivCall;
+            for (let i = 0; i < TotalForm; i++) {
+              const idForm = ConfigAddForm.id[i];
+              const placeholder = ConfigAddForm.Placehorder[i];
+              const inputValue = document.getElementById(idForm).value;
+              formValues[idForm] = inputValue;
+            }
+            $.ajax({
+              type: 'POST',
+              url: urlEnd,
+              data: formValues,
+            }).success(function(success) {
+              Swal.fire({
+                title: "Berhasil!",
+                text: "Anda Berhasil Input Data",
+                icon: "success"
+              });
+                LoadData(urlLoad,idDiv);
+            })
+            // console.log(formValues);
+
+          },  // yesBtnFunction
+          )).show()
+    }
+    }
+
 ],
 
   },
@@ -106,12 +163,78 @@ function TableCrash(Params,settingData){
         });
     }
   }
+}else if(Params.ButtonAddData){
+  configParam = {
+    dom: 'Bfrtip',
+    buttons : {
+
+      dom : {
+        button:{
+          className:'btn'
+        }
+      }
+    ,
+  buttons: [
+    {
+      text:'Add Data',
+      className : 'btn btn-outline-primary',
+      action: function ( e, dt, node, config ) {
+        var headerModal = 'Add Data';
+        var valueDetail = '';
+        for (let i = 0; i < TotalForm; i++) {
+          placeholder = ConfigAddForm.Placehorder[i];
+          idForm = ConfigAddForm.id[i];
+          valueDetail = valueDetail +  '<div class="col-lg-12">' +
+          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+'">' +
+          '</div><br> ';
+
+        }
+
+
+        (new Modal(
+          headerModal,            // title
+          valueDetail, // text
+          'Close',              // noBtnName
+          'Confirm',            // yesBtnName
+          ()=>{
+            const formValues = {};
+            const urlEnd  = ConfigAddForm.UrlEndPoint;
+            const urlLoad = ConfigAddForm.urlLoad;
+            const idDiv = ConfigAddForm.idDivCall;
+            for (let i = 0; i < TotalForm; i++) {
+              const idForm = ConfigAddForm.id[i];
+              const placeholder = ConfigAddForm.Placehorder[i];
+              const inputValue = document.getElementById(idForm).value;
+              formValues[idForm] = inputValue;
+            }
+            $.ajax({
+              type: 'POST',
+              url: urlEnd,
+              data: formValues,
+            }).success(function(success) {
+              Swal.fire({
+                title: "Berhasil!",
+                text: "Anda Berhasil Input Data",
+                icon: "success"
+              });
+                LoadData(urlLoad,idDiv);
+            })
+            // console.log(formValues);
+
+          },  // yesBtnFunction
+          )).show()
+    }
+    }
+    ]
+  }
+};
 }
-let combined = { ...configParam, ...settingData, ...shortData };
+let combined = { ...configParam, ...settingData, ...shortData, ...AddButton };
 console.log(combined);
 return   $("#"+Params.id).DataTable(combined);
 
 }
+
 
 function ResizeTable(Id) {
     $("#"+Id+" th").css('cursor','col-resize');
