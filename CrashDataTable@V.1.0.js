@@ -402,3 +402,62 @@ function LoadData(Url,idDiv){
     }
   });
 }
+
+function DeleteData(Data){
+  console.log(Data);
+  var id = Data.id;
+  var rowId = Data.WhereId;
+  var table = Data.table;
+  var url = Data.UrlEndPoint;
+  var database = Data.EndPointNameDB;
+  var urlLoad = Data.urlLoad;
+  var DivCall = Data.DivCallback;
+  CreateDelete(id);
+$('#'+Data.id+' tbody').on('click', 'tr img.icon-delete', function () {
+
+  const row = this.closest('tr');
+  const cellData = row.cells[rowId].textContent;
+  console.log(cellData);
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "Anda Akan Menghapus Data Ini !",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      data = {
+        database : database,
+        id : cellData
+      }
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+      }).success(function(success) {
+        Data.table
+      .row($(this).parents('tr'))
+      .remove()
+      .draw();
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+        LoadData(urlLoad,DivCall);
+      }).error(function(err){
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been Not deleted.",
+          icon: "error"
+        });
+      });
+
+    }
+  });
+
+});
+}
