@@ -1,11 +1,9 @@
-
-#  Hi, I'm Fauzi! 👋
 # Crash Data Table
 
 
 
-Ini sebenar nya adalah Plugin DataTable yang sudah saya tambahkan beberapa tools untuk membantu kalian
-beberapa fitur yang saya sediakan
+## 🚀 Semoga Memudahkan Kalian ^_^
+CRUD dengan DataTable Lebih Cepat
 
 
 
