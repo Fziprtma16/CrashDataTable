@@ -221,6 +221,26 @@ DeleteData({
 })
 ```
 
+## Parameters
+
+| Parameters             | Type                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| id | String |
+| Excel | bolean |
+| SearchFooter | bolean |
+| ResizeTable | bolean |
+| ShortTable | bolean |
+| ShortingRow | int |
+| TypeShorting | string |
+| ButtonAddData | bolean |
+| TotalFormadd | int |
+| ConfigForm | json |
+| default DataTabale Parameters | default DataTabale Parameters |
+
+
+
+
+
 
 
 ## Usage
