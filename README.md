@@ -1,11 +1,9 @@
-
-#  Hi, I'm Fauzi! 👋
 # Crash Data Table
 
 
 
-Ini sebenar nya adalah Plugin DataTable yang sudah saya tambahkan beberapa tools untuk membantu kalian
-beberapa fitur yang saya sediakan
+## 🚀 Semoga Memudahkan Kalian ^_^
+CRUD dengan DataTable Lebih Cepat
 
 
 
@@ -21,40 +19,64 @@ beberapa fitur yang saya sediakan
 ## Edit Table
 ![Data Table Screenshot](https://healthsys.my.id/crash/edit%20table.png)
 
+## Delete Table
+![Data Table Screenshot](https://healthsys.my.id/crash/delete%20datatable.png)
+
 
 
 ## Start Table
 
 ```html 
-<div class="table-responsive">
-   <table id="table-dr" class="table table-bordered">
-     <thead>
-       <tr>
-         <th>Kode Id</th>
-         <th>Name</th>
-         <th>Contact Person</th>
-         <th>Alamat</th>
-         <th>Kota</th>
-       </tr>
-     </thead>
-     <tbody id="IdBody">
-         <tr>
-           <td alias="KODERK">0001A</td>
-           <td alias="Company">PT JAYA ABADI</td>
-           <td alias="ContactPerson">FAUZI</td>
-           <td alias="Address">JALAN KEMAN AJA</td>
-           <td alias="City">JAKARTA</td>
-         </tr>
-     </tbody>
-     <tfoot>
-       <th>Kode Id</th>
-       <th>Name</th>
-       <th>Contact Person</th>
-       <th>Alamat</th>
-       <th>Kota</th>
-     </tfoot>
-   </table>
- </div>
+ <div class="table-responsive">
+        <table id="table-dr" class="table table-bordered table-striped">
+          <thead>
+            <tr>
+              <th>Kode Id</th>
+              <th>Name</th>
+              <th>Contact Person</th>
+              <th>Alamat</th>
+              <th>Kota</th>
+            </tr>
+          </thead>
+          <tbody id="IdBody">
+              <tr>
+                <td alias="KODERK">0001A</td>
+                <td alias="Company">PT JAYA ABADI</td>
+                <td alias="ContactPerson">FAUZI</td>
+                <td alias="Address">JALAN KEMAN AJA</td>
+                <td alias="City">JAKARTA</td>
+              </tr>
+              <tr>
+                <td alias="KODERK">0002A</td>
+                <td alias="Company">PT JAYA </td>
+                <td alias="ContactPerson">FAUZI</td>
+                <td alias="Address">JALAN KEMAN AJA</td>
+                <td alias="City">JAKARTA</td>
+              </tr>
+              <tr>
+                <td alias="KODERK">0003A</td>
+                <td alias="Company">PT  ABADI</td>
+                <td alias="ContactPerson">FAUZI</td>
+                <td alias="Address">JALAN KEMAN AJA</td>
+                <td alias="City">JAKARTA</td>
+              </tr>
+              <tr>
+                <td alias="KODERK">0004A</td>
+                <td alias="Company">PT JAYA ABADI HORAS</td>
+                <td alias="ContactPerson">FAUZI</td>
+                <td alias="Address">JALAN KEMAN AJA</td>
+                <td alias="City">JAKARTA</td>
+              </tr>
+          </tbody>
+          <tfoot>
+            <th>Kode Id</th>
+            <th>Name</th>
+            <th>Contact Person</th>
+            <th>Alamat</th>
+            <th>Kota</th>
+          </tfoot>
+        </table>
+      </div>  
 ```
 Gunakan Attributte "ALIAS" sesuai isi row di database anda
 
@@ -100,18 +122,25 @@ ShowDetailTable({
 })
 ```
 
+## Delete table
+
+```javascript
+DeleteData({
+    id : "table-dr", //ID TABLE
+    table : tablerrrr, //VARIABEL TABLE
+    WhereId : 0, //WHERE ID TO DELETE DATABASE
+    EndPointNameDB : "table_perusahaan", //NAME DATABASE
+    UrlEndPoint : "", //URL ENDPOINT 
+    urlLoad : "", //URL LOAD
+    DivCallback : "" //DIV LOAD
+})
+```
+
 
 
 ## Usage
 
-- Silahkan Masukan CSS yang tersedia di folder "DIST"
-
-- Dan Masukan Script Di Folder "SRC"
-
-
-## Optimizations
-
-What optimizations did you make in your code? E.g. refactors, performance improvements, accessibility
+- Example In `index.html`
 
 
 ## Features Soon
@@ -119,5 +148,4 @@ What optimizations did you make in your code? E.g. refactors, performance improv
 - Add Data
 - Fixed Row
 - Grouping Data
-- Delete Data
 
