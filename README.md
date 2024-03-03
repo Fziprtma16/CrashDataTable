@@ -22,6 +22,9 @@ CRUD dengan DataTable Lebih Cepat
 ## Delete Table
 ![Data Table Screenshot](https://healthsys.my.id/crash/delete%20datatable.png)
 
+## Add Table
+![Data Table Screenshot](https://healthsys.my.id/crash/add%20table.png)
+
 
 
 ## Start Table
@@ -85,14 +88,41 @@ Gunakan Attributte "ALIAS" sesuai isi row di database anda
 
 ```javascript
 var tablerrrr = TableCrash({
-  id: "table-dr", //ID TABLE
-  Excel: true, // BUTTON EXCEL
-  SearchFooter: true, //SEARCH FOOTER
-  ResizeTable:true, //RESIZE TABLE
-  ShortTable : true, //SHORT TABLE
-  ShortingRow : 1, //SELECT SHORT ROW
-  TypeShorting :"asc" //TYPE SHOR , DESC OR ASC
-},{searching:false});
+id: "table-dr", //ID TABLE
+Excel: true, // BUTTON EXCEL
+SearchFooter: true, //SEARCH FOOTER
+ResizeTable:true, //RESIZE TABLE
+ShortTable : true, //SHORT TABLE
+ShortingRow : 0, //SELECT SHORT ROW
+TypeShorting :"asc", //TYPE SHOR , DESC OR ASC
+ButtonAddData : true, //BUTTON ADD DATA
+TotalFormadd : 4, // TOTAL FORM
+ConfigForm : {Placehorder : [//SETTING PLACEHOLDER
+"Nama Perusahaan",
+"Contact Person",
+"Alamat",
+"Kota"
+],id : [ //SETTING ID
+  "AddName",
+  "AddCp",
+  "AddAlamat",
+  "AddKota"
+],urlEndPoint : "", //URL END POINT ADD FORM
+urlLoad:"", //URL LOAD PAGE ADD FORM
+idDivCall : ""} //URL LOAD DIV ADD FORM
+},{searching:true});
+```
+## Add Data
+
+Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
+
+```json
+  {
+      AddName : "Value Name",
+      AddCp : "Value CP",
+      AddAlamat : "Value Alamat",
+      AddKota : "Value Kota"
+  }
 ```
 
 ## Edit table
@@ -145,7 +175,6 @@ DeleteData({
 
 ## Features Soon
 
-- Add Data
 - Fixed Row
 - Grouping Data
 
