@@ -112,6 +112,18 @@ urlLoad:"", //URL LOAD PAGE ADD FORM
 idDivCall : ""} //URL LOAD DIV ADD FORM
 },{searching:true});
 ```
+## Add Data
+
+Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
+
+```json
+  {
+      AddName : "Value Name",
+      AddCp : "Value CP",
+      AddAlamat : "Value Alamat",
+      AddKota : "Value Kota"
+  }
+```
 
 ## Edit table
 
