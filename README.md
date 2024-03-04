@@ -151,7 +151,9 @@ ShortTable : true, //SHORT TABLE
 ShortingRow : 0, //SELECT SHORT ROW
 TypeShorting :"asc", //TYPE SHOR , DESC OR ASC
 ButtonAddData : true, //BUTTON ADD DATA
-TotalFormadd : 4, // TOTAL FORM
+TotalFormadd : 4, // TOTAL FORM,
+FixedCloumn : true, //FIXED COLUMN
+StartFixedCloumn :2, //START FIXED COLUMN
 ConfigForm : {Placehorder : [//SETTING PLACEHOLDER
 "Nama Perusahaan",
 "Contact Person",
@@ -250,6 +252,5 @@ DeleteData({
 
 ## Features Soon
 
-- Fixed Row
 - Grouping Data
 
