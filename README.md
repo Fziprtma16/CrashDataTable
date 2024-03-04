@@ -1,12 +1,5 @@
-# Crash Data Table
-
-
-
 ## 🚀 Semoga Memudahkan Kalian ^_^
 CRUD dengan DataTable Lebih Cepat
-
-
-
 
 
 ## Data Table
@@ -188,6 +181,8 @@ ShowDetailTable({
     value_html : '<h1>Detail</h1>' //ISI VALUE
 })
 ```
+
+gunakan Click Kanan Ke Row Yang di Pilih Untuk Melihat Detail
 
 ## Delete table
 
