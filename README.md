@@ -237,6 +237,8 @@ DeleteData({
 | ButtonAddData | bolean |
 | TotalFormadd | int |
 | ConfigForm | json |
+| FixedCloumn | bolean |
+| StartFixedCloumn | int |
 | default DataTabale Parameters | default DataTabale Parameters |
 
 
