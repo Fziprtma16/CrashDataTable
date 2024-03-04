@@ -230,6 +230,7 @@ DeleteData({
 ## Usage
 
 - Example In `index.html`
+- Load In `LoadTable.html`
 
 
 ## Features Soon
