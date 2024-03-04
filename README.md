@@ -139,7 +139,7 @@ ConfigForm : {Placehorder : [//SETTING PLACEHOLDER
   "AddCp",
   "AddAlamat",
   "AddKota"
-],urlEndPoint : "", //URL END POINT ADD FORM
+],UrlLinkEnd : "", //URL END POINT ADD FORM
 urlLoad:"", //URL LOAD PAGE ADD FORM
 idDivCall : ""} //URL LOAD DIV ADD FORM
 },{searching:true});
