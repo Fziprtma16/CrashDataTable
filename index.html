@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="dist/datatable.css">
 <link rel="stylesheet" href="dist/jqueryui.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="dist/fixedcolumn.css">
 <body>
     <div class="container" id="TableCrash">
 
@@ -18,33 +19,14 @@
 <script src="src/jqueryui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="src/datatable.js"></script>
+<script src="src/fixedcolumn.js" charset="utf-8"></script>
 <script src="src/loadingoverlay.js"></script>
 <script src="src/swalert.js"></script>
 <script src="CrashDataTable@V.1.0.js"></script>
 <script>
 $( document ).ready(function() {
-  LoadTable();
+  LoadData('LoadTable.html','TableCrash');
 });
-function LoadTable(){
-  $.LoadingOverlay("show");
-  $('#TableCrash').empty();
-  $("#TableCrash").load('LoadTable.html',function(response,status,xhr){
-    if (status == "error") {
-      $.LoadingOverlay("hide");
-      var msg = "Sorry but there was an error: ";
-      Swal.fire({
-        title: msg + xhr.status + " " + xhr.statusText,
-        text: "",
-        type: 'error',
-      }).then(function(result) {
-        if (true) {
-          return false;
-        }
-      })
-    }else{
-      $.LoadingOverlay("hide");
-    }
-  });
-}
+
 </script>
 </html>

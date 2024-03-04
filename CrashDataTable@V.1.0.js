@@ -4,8 +4,10 @@ function TableCrash(Params,settingData,AddData){
   var configParam = {};
   var shortData = {};
   var AddButton = {};
+  var FixedCloumn = {};
   var TotalForm = Params.TotalFormadd;
   var ConfigAddForm = Params.ConfigForm;
+  var StartFixed = Params.StartFixedCloumn;
   console.log(ConfigAddForm);
 
   if (Params.ResizeTable) {
@@ -15,6 +17,13 @@ function TableCrash(Params,settingData,AddData){
     shortData = {
       "iDisplayLength": -1,
       "aaSorting": [[ Params.ShortingRow,  Params.TypeShorting ]]
+    }
+  }
+  if(Params.FixedCloumn){
+    FixedCloumn={
+      fixedColumns: {
+        start: StartFixed
+    }
     }
   }
   if(Params.Excel && Params.SearchFooter && Params.ButtonAddData){
@@ -229,12 +238,11 @@ function TableCrash(Params,settingData,AddData){
   }
 };
 }
-let combined = { ...configParam, ...settingData, ...shortData, ...AddButton };
+let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn };
 console.log(combined);
 return   $("#"+Params.id).DataTable(combined);
 
 }
-
 
 function ResizeTable(Id) {
     $("#"+Id+" th").css('cursor','col-resize');
