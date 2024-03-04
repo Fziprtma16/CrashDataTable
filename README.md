@@ -114,29 +114,9 @@ Gunakan Attributte "ALIAS" sesuai isi row di database anda
 
 ```javascript
 $( document ).ready(function() {
-  LoadTable();
+  LoadData('LoadTable.html','TableCrash');
 });
-function LoadTable(){
-  $.LoadingOverlay("show");
-  $('#TableCrash').empty();
-  $("#TableCrash").load('LoadTable.html',function(response,status,xhr){
-    if (status == "error") {
-      $.LoadingOverlay("hide");
-      var msg = "Sorry but there was an error: ";
-      Swal.fire({
-        title: msg + xhr.status + " " + xhr.statusText,
-        text: "",
-        type: 'error',
-      }).then(function(result) {
-        if (true) {
-          return false;
-        }
-      })
-    }else{
-      $.LoadingOverlay("hide");
-    }
-  });
-}
+
 ```
 
 ## Usage/Examples
