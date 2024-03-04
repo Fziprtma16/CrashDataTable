@@ -1,6 +1,11 @@
-function TableCrash(Params,settingData,AddData){
-  console.log(settingData);
+/*
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+         MUHAMMAD FAUZI PRATAMA
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+*/
 
+
+function TableCrash(Params,settingData,AddData){
   var configParam = {};
   var shortData = {};
   var AddButton = {};
@@ -8,8 +13,6 @@ function TableCrash(Params,settingData,AddData){
   var TotalForm = Params.TotalFormadd;
   var ConfigAddForm = Params.ConfigForm;
   var StartFixed = Params.StartFixedCloumn;
-  console.log(ConfigAddForm);
-
   if (Params.ResizeTable) {
     ResizeTable(Params.id);
   }
@@ -90,7 +93,6 @@ function TableCrash(Params,settingData,AddData){
               });
                 LoadData(urlLoad,idDiv);
             })
-            // console.log(formValues);
 
           },  // yesBtnFunction
           )).show()
@@ -228,7 +230,7 @@ function TableCrash(Params,settingData,AddData){
               });
                 LoadData(urlLoad,idDiv);
             })
-            // console.log(formValues);
+
 
           },  // yesBtnFunction
           )).show()
@@ -239,7 +241,6 @@ function TableCrash(Params,settingData,AddData){
 };
 }
 let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn };
-console.log(combined);
 return   $("#"+Params.id).DataTable(combined);
 
 }
@@ -257,7 +258,7 @@ function ResizeTable(Id) {
         startX = e.pageX;
         startWidth = $(this).width();
         $(start).addClass("resizing");
-              console.log(start);
+
     });
 
     $(document).mousemove(function(e) {
@@ -429,8 +430,8 @@ function EditTable(Params){
     }else{
       var Kode = _id;
     }
-    console.log(Kode);
-    console.log(parameters);
+    // console.log(Kode);
+    // console.log(parameters);
     var searchData = data.toString();
 
     var tbl = document.getElementById(Params.id_body_table);
@@ -489,7 +490,7 @@ function EditTable(Params){
 }
 
 const updateField = (kodeprod,id,url,data,parameters,callback) =>{
-  console.log(data);
+  // console.log(data);
   if (parameters == "") {
     Swal.fire({
         title: err,
@@ -535,7 +536,7 @@ function LoadData(Url,idDiv){
 }
 
 function DeleteData(Data){
-  console.log(Data);
+  // console.log(Data);
   var id = Data.id;
   var rowId = Data.WhereId;
   var table = Data.table;
@@ -548,7 +549,7 @@ $('#'+Data.id+' tbody').on('click', 'tr img.icon-delete', function () {
 
   const row = this.closest('tr');
   const cellData = row.cells[rowId].textContent;
-  console.log(cellData);
+  // console.log(cellData);
 
   Swal.fire({
     title: "Are you sure?",
