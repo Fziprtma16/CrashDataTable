@@ -1,12 +1,5 @@
-# Crash Data Table
-
-
-
 ## 🚀 Semoga Memudahkan Kalian ^_^
 CRUD dengan DataTable Lebih Cepat
-
-
-
 
 
 ## Data Table
@@ -189,6 +182,8 @@ ShowDetailTable({
 })
 ```
 
+gunakan Click Kanan Ke Row Yang di Pilih Untuk Melihat Detail
+
 ## Delete table
 
 ```javascript
@@ -230,6 +225,7 @@ DeleteData({
 ## Usage
 
 - Example In `index.html`
+- Load In `LoadTable.html`
 
 
 ## Features Soon
