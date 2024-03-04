@@ -25,7 +25,34 @@ CRUD dengan DataTable Lebih Cepat
 ## Add Table
 ![Data Table Screenshot](https://healthsys.my.id/crash/add%20table.png)
 
+## Start Load HTML
 
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Crash Data Table</title>
+</head>
+<link rel="stylesheet" href="dist/datatable.css">
+<link rel="stylesheet" href="dist/jqueryui.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<body>
+    <div class="container" id="TableCrash">
+
+    </div>
+
+</body>
+<script src="src/jquery.js"></script>
+<script src="src/jqueryui.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="src/datatable.js"></script>
+<script src="src/loadingoverlay.js"></script>
+<script src="src/swalert.js"></script>
+<script src="CrashDataTable@V.1.0.js"></script>
+</html>
+```
 
 ## Start Table
 
@@ -83,6 +110,34 @@ CRUD dengan DataTable Lebih Cepat
 ```
 Gunakan Attributte "ALIAS" sesuai isi row di database anda
 
+## Load Data Content
+
+```javascript
+$( document ).ready(function() {
+  LoadTable();
+});
+function LoadTable(){
+  $.LoadingOverlay("show");
+  $('#TableCrash').empty();
+  $("#TableCrash").load('LoadTable.html',function(response,status,xhr){
+    if (status == "error") {
+      $.LoadingOverlay("hide");
+      var msg = "Sorry but there was an error: ";
+      Swal.fire({
+        title: msg + xhr.status + " " + xhr.statusText,
+        text: "",
+        type: 'error',
+      }).then(function(result) {
+        if (true) {
+          return false;
+        }
+      })
+    }else{
+      $.LoadingOverlay("hide");
+    }
+  });
+}
+```
 
 ## Usage/Examples
 
@@ -96,7 +151,9 @@ ShortTable : true, //SHORT TABLE
 ShortingRow : 0, //SELECT SHORT ROW
 TypeShorting :"asc", //TYPE SHOR , DESC OR ASC
 ButtonAddData : true, //BUTTON ADD DATA
-TotalFormadd : 4, // TOTAL FORM
+TotalFormadd : 4, // TOTAL FORM,
+FixedCloumn : true, //FIXED COLUMN
+StartFixedCloumn :2, //START FIXED COLUMN
 ConfigForm : {Placehorder : [//SETTING PLACEHOLDER
 "Nama Perusahaan",
 "Contact Person",
@@ -166,6 +223,28 @@ DeleteData({
 })
 ```
 
+## Parameters
+
+| Parameters             | Type                                                                |
+| ----------------- | ------------------------------------------------------------------ |
+| id | String |
+| Excel | bolean |
+| SearchFooter | bolean |
+| ResizeTable | bolean |
+| ShortTable | bolean |
+| ShortingRow | int |
+| TypeShorting | string |
+| ButtonAddData | bolean |
+| TotalFormadd | int |
+| ConfigForm | json |
+| FixedCloumn | bolean |
+| StartFixedCloumn | int |
+| default DataTabale Parameters | default DataTabale Parameters |
+
+
+
+
+
 
 
 ## Usage
@@ -175,6 +254,5 @@ DeleteData({
 
 ## Features Soon
 
-- Fixed Row
 - Grouping Data
 
