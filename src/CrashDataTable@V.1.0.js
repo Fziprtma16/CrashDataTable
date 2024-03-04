@@ -63,7 +63,7 @@ function TableCrash(Params,settingData,AddData){
           '</div><br> ';
 
         }
-
+  const formValues = {};
 
         (new Modal(
           headerModal,            // title
@@ -71,19 +71,18 @@ function TableCrash(Params,settingData,AddData){
           'Close',              // noBtnName
           'Confirm',            // yesBtnName
           ()=>{
-            const formValues = {};
-            const urlEnd  = ConfigAddForm.UrlEndPoint;
+            const urlBackEnd  = ConfigAddForm.UrlLinkEnd;
             const urlLoad = ConfigAddForm.urlLoad;
             const idDiv = ConfigAddForm.idDivCall;
-            for (let i = 0; i < TotalForm; i++) {
-              const idForm = ConfigAddForm.id[i];
-              const placeholder = ConfigAddForm.Placehorder[i];
+            for (let x = 0; x < TotalForm; x++) {
+              const idForm = ConfigAddForm.id[x];
+              const placeholder = ConfigAddForm.Placehorder[x];
               const inputValue = document.getElementById(idForm).value;
               formValues[idForm] = inputValue;
             }
             $.ajax({
               type: 'POST',
-              url: urlEnd,
+              url: urlBackEnd,
               data: formValues,
             }).success(function(success) {
               Swal.fire({
@@ -91,6 +90,12 @@ function TableCrash(Params,settingData,AddData){
                 text: "Anda Berhasil Input Data",
                 icon: "success"
               });
+              for (let i = 0; i < TotalForm; i++) {
+                const idForm = ConfigAddForm.id[i];
+                const placeholder = ConfigAddForm.Placehorder[i];
+                const inputValue = document.getElementById(idForm+i).value = '';
+                formValues[idForm] = inputValue;
+              }
                 LoadData(urlLoad,idDiv);
             })
 
