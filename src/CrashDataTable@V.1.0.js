@@ -6,6 +6,8 @@
 
 
 function TableCrash(Params,settingData,AddData){
+  console.log(settingData);
+  const formValues = {};
   var configParam = {};
   var shortData = {};
   var AddButton = {};
@@ -13,6 +15,8 @@ function TableCrash(Params,settingData,AddData){
   var TotalForm = Params.TotalFormadd;
   var ConfigAddForm = Params.ConfigForm;
   var StartFixed = Params.StartFixedCloumn;
+  console.log(ConfigAddForm);
+
   if (Params.ResizeTable) {
     ResizeTable(Params.id);
   }
@@ -53,17 +57,19 @@ function TableCrash(Params,settingData,AddData){
       text:'Add Data',
       className : 'btn btn-outline-primary',
       action: function ( e, dt, node, config ) {
+        console.log(e);
         var headerModal = 'Add Data';
         var valueDetail = '';
         for (let i = 0; i < TotalForm; i++) {
           placeholder = ConfigAddForm.Placehorder[i];
           idForm = ConfigAddForm.id[i];
           valueDetail = valueDetail +  '<div class="col-lg-12">' +
-          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+'">' +
+          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+i+'">' +
           '</div><br> ';
 
         }
-  const formValues = {};
+
+
 
         (new Modal(
           headerModal,            // title
@@ -77,9 +83,10 @@ function TableCrash(Params,settingData,AddData){
             for (let x = 0; x < TotalForm; x++) {
               const idForm = ConfigAddForm.id[x];
               const placeholder = ConfigAddForm.Placehorder[x];
-              const inputValue = document.getElementById(idForm).value;
+              const inputValue = document.getElementById(idForm+x).value;
               formValues[idForm] = inputValue;
             }
+                  // console.log(formValues);
             $.ajax({
               type: 'POST',
               url: urlBackEnd,
@@ -96,8 +103,10 @@ function TableCrash(Params,settingData,AddData){
                 const inputValue = document.getElementById(idForm+i).value = '';
                 formValues[idForm] = inputValue;
               }
+              DeleteModal();
                 LoadData(urlLoad,idDiv);
             })
+            // console.log(formValues);
 
           },  // yesBtnFunction
           )).show()
@@ -201,11 +210,10 @@ function TableCrash(Params,settingData,AddData){
           placeholder = ConfigAddForm.Placehorder[i];
           idForm = ConfigAddForm.id[i];
           valueDetail = valueDetail +  '<div class="col-lg-12">' +
-          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+'">' +
+          '<input class="form-control" placeholder="'+placeholder+'" id="'+idForm+i+'">' +
           '</div><br> ';
 
         }
-
 
         (new Modal(
           headerModal,            // title
@@ -213,14 +221,14 @@ function TableCrash(Params,settingData,AddData){
           'Close',              // noBtnName
           'Confirm',            // yesBtnName
           ()=>{
-            const formValues = {};
+
             const urlEnd  = ConfigAddForm.UrlEndPoint;
             const urlLoad = ConfigAddForm.urlLoad;
             const idDiv = ConfigAddForm.idDivCall;
             for (let i = 0; i < TotalForm; i++) {
               const idForm = ConfigAddForm.id[i];
               const placeholder = ConfigAddForm.Placehorder[i];
-              const inputValue = document.getElementById(idForm).value;
+              const inputValue = document.getElementById(idForm+i).value;
               formValues[idForm] = inputValue;
             }
             $.ajax({
@@ -233,9 +241,10 @@ function TableCrash(Params,settingData,AddData){
                 text: "Anda Berhasil Input Data",
                 icon: "success"
               });
+              DeleteModal();
                 LoadData(urlLoad,idDiv);
             })
-
+            // console.log(formValues);
 
           },  // yesBtnFunction
           )).show()
@@ -246,9 +255,36 @@ function TableCrash(Params,settingData,AddData){
 };
 }
 let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn };
+console.log(combined);
 return   $("#"+Params.id).DataTable(combined);
 
 }
+
+function CreateDelete(Data){
+const table = document.getElementById(Data);
+  // Mendapatkan elemen tbody dari tabel
+const tbody = table.querySelector('tbody');
+const thead = table.querySelector('thead');
+const tfoot = table.querySelector('tfoot');
+// Mendapatkan semua baris dalam elemen tbody
+const rows = tbody.querySelectorAll('tr');
+const headerRow = thead.querySelector('tr');
+const footerRow = tfoot.querySelector('tr');
+const newHeaderCell1 = document.createElement('th');
+const newFooterCell1 = document.createElement('th');
+  newHeaderCell1.textContent = 'Action';
+  newFooterCell1.textContent = 'Action';
+  headerRow.appendChild(newHeaderCell1);
+  footerRow.appendChild(newFooterCell1);
+// Iterasi melalui setiap baris dan menambahkan elemen td
+rows.forEach((row,index) => {
+const newCell = document.createElement('td');
+newCell.innerHTML = '<img class="icon-delete" style="width:30px;" id="hapus'+index+'" src="https://cdn-icons-png.flaticon.com/128/10336/10336279.png" />';
+row.appendChild(newCell);
+});
+
+}
+
 
 function ResizeTable(Id) {
     $("#"+Id+" th").css('cursor','col-resize');
@@ -263,6 +299,7 @@ function ResizeTable(Id) {
         startX = e.pageX;
         startWidth = $(this).width();
         $(start).addClass("resizing");
+              console.log(start);
 
     });
 
@@ -290,9 +327,18 @@ function Modal(title, text, noBtnName='Close', yesBtnName='', yesBtnAction=()=>{
     }
 }
 
+function DeleteModal(){
+  $( '.modal' ).remove();
+  $(".modal-custom").remove();
+  $( '.modal-backdrop' ).remove();
+  $('.modal-dialog').remove();
+  $('body').removeClass( "modal-open" );
+  $('body').removeAttr( 'style' );
+}
+
 function _buildModal(title, text, noBtnName, yesBtnName, yesBtnFunc) {
     var modal = document.createElement('div')
-    modal.setAttribute('class', 'modal fade')
+    modal.setAttribute('class', 'modal fade modal-custom')
     modal.setAttribute('tabindex', '-1')
     modal.setAttribute('aria-labelledby', 'modalLabel')
     modal.setAttribute('aria-hidden', 'true')
@@ -413,6 +459,9 @@ function ShowDetailTable(Params){
 
 
 
+
+
+
 function EditTable(Params){
   var idTable = Params.id;
   var table = Params.table;
@@ -435,8 +484,8 @@ function EditTable(Params){
     }else{
       var Kode = _id;
     }
-    // console.log(Kode);
-    // console.log(parameters);
+    console.log(Kode);
+    console.log(parameters);
     var searchData = data.toString();
 
     var tbl = document.getElementById(Params.id_body_table);
@@ -495,7 +544,7 @@ function EditTable(Params){
 }
 
 const updateField = (kodeprod,id,url,data,parameters,callback) =>{
-  // console.log(data);
+  console.log(data);
   if (parameters == "") {
     Swal.fire({
         title: err,
@@ -517,6 +566,7 @@ const updateField = (kodeprod,id,url,data,parameters,callback) =>{
     callback(err);
   });
 }
+
 
 function LoadData(Url,idDiv){
   $.LoadingOverlay("show");
@@ -540,8 +590,9 @@ function LoadData(Url,idDiv){
   });
 }
 
+
 function DeleteData(Data){
-  // console.log(Data);
+  console.log(Data);
   var id = Data.id;
   var rowId = Data.WhereId;
   var table = Data.table;
@@ -554,7 +605,7 @@ $('#'+Data.id+' tbody').on('click', 'tr img.icon-delete', function () {
 
   const row = this.closest('tr');
   const cellData = row.cells[rowId].textContent;
-  // console.log(cellData);
+  console.log(cellData);
 
   Swal.fire({
     title: "Are you sure?",
