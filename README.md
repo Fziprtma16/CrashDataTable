@@ -226,13 +226,12 @@ Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
 | Parameters             | Type                                                                |
 | ----------------- | ------------------------------------------------------------------ |
 | id | String |
-| Excel | bolean |
+| Button | bolean |
 | SearchFooter | bolean |
 | ResizeTable | bolean |
 | ShortTable | bolean |
 | ShortingRow | int |
 | TypeShorting | string |
-| ButtonAddData | bolean |
 | TotalFormadd | int |
 | ConfigForm | json |
 | FixedCloumn | bolean |
