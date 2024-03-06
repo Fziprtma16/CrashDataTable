@@ -46,12 +46,13 @@ function TableCrash(Params,settingData,AddData){
     ,
   buttons: [
   {
-    extend : 'excel',
+
     text:'Export Excel',
     className : 'btn btn-outline-success',
-    excelStyles:{
-      template : 'blue_medium'
-    }
+  action:function(){
+ExportExcelTable(Params.id,'Export Excel.xlsx');
+
+  }
   },
     {
       text:'Add Data',
@@ -154,11 +155,11 @@ function TableCrash(Params,settingData,AddData){
     ,
   buttons: [
   {
-    extend : 'excel',
+
     text:'Export Excel',
     className : 'btn btn-outline-success',
-    excelStyles:{
-      template : 'blue_medium'
+    action : function () {
+      ExportExcelTable(Params.id,'Export Excel.xlsx');
     }
   }
     ]
@@ -647,5 +648,30 @@ $('#'+Data.id+' tbody').on('click', 'tr img.icon-delete', function () {
     }
   });
 
+});
+}
+
+function ExportExcelTable(tableId,NamaFile){
+  const table = document.getElementById(tableId);
+ const rows = table.getElementsByTagName('tr');
+ for (let i = 0; i < rows.length; i++) {
+    const rowData = [];
+    const cells = rows[i].getElementsByTagName('td');
+    if (i % 2 !== 0) {
+    for (let j = 0; j < cells.length; j++) {
+          cells[j].setAttribute('data-fill-color', 'e2fbff');
+    }
+  }else{
+    for (let j = 0; j < cells.length; j++) {
+        cells[j].setAttribute('data-fill-color', 'f2f2f2');
+    }
+  }
+
+  }
+  TableToExcel.convert(document.getElementById(tableId), {
+name: NamaFile,
+sheet: {
+  name: "Sheet 1"
+}
 });
 }

@@ -45,13 +45,14 @@ CRUD dengan DataTable Lebih Cepat
 <script src="src/fixedcolumn.js" ></script>
 <script src="src/loadingoverlay.js"></script>
 <script src="src/swalert.js"></script>
+<script src="src/tabletoexcel.js"></script>
 <script src="CrashDataTable@V.1.0.js"></script>
 </html>
 ```
 
 ## Start Table
 
-```html 
+```html
  <div class="table-responsive">
         <table id="table-dr" class="table table-bordered table-striped">
           <thead>
@@ -172,6 +173,17 @@ EditTable({
   id_body_table : 'Id Body Table' //ID BODY <TBODY>
 });
 ```
+Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
+
+```json
+  {
+      paramsparameters : "Nama Parameters Data Yang Anda Akan Edit",
+      value : "Value Data Yang Anda Update",
+      code : "Code Parameter 'Where' Pada Saat Edit"
+  }
+```
+
+
 ## Detail table
 
 ```javascript
@@ -179,7 +191,7 @@ ShowDetailTable({
     id : "table-dr", // ID TABLE
     table : tablerrrr, //VARIABEL TABLE
     header_detail : 'Detail Data', //HEADER MODAL
-    custom_value : true, //CUSTOME VALUE 
+    custom_value : true, //CUSTOME VALUE
     value_html : '<h1>Detail</h1>' //ISI VALUE
 })
 ```
@@ -194,10 +206,19 @@ DeleteData({
     table : tablerrrr, //VARIABEL TABLE
     WhereId : 0, //WHERE ID TO DELETE DATABASE
     EndPointNameDB : "table_perusahaan", //NAME DATABASE
-    UrlEndPoint : "", //URL ENDPOINT 
+    UrlEndPoint : "", //URL ENDPOINT
     urlLoad : "", //URL LOAD
     DivCallback : "" //DIV LOAD
 })
+```
+
+Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
+
+```json
+  {
+      database : "Nama Database Anda",
+      id : "Id yang akan anda Hapus"
+  }
 ```
 
 ## Parameters
@@ -228,9 +249,3 @@ DeleteData({
 
 - Example In `index.html`
 - Load In `LoadTable.html`
-
-
-## Features Soon
-
-- Grouping Data
-
