@@ -8,6 +8,7 @@ function TableCrash(Params,settingData,AddData){
   var TotalForm = Params.TotalFormadd;
   var ConfigAddForm = Params.ConfigForm;
   var StartFixed = Params.StartFixedCloumn;
+  var Button = Params.button;
   console.log(ConfigAddForm);
 
   if (Params.ResizeTable) {
@@ -26,7 +27,7 @@ function TableCrash(Params,settingData,AddData){
     }
     }
   }
-  if(Params.Excel && Params.SearchFooter && Params.ButtonAddData && Params.Pdf){
+  if(Params.button){
     configParam = {
     dom: 'Bfrtip',
     buttons : {
