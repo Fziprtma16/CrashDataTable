@@ -1,10 +1,3 @@
-/*
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-         MUHAMMAD FAUZI PRATAMA
-@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-*/
-
-
 function TableCrash(Params,settingData,AddData){
   console.log(settingData);
   const formValues = {};
@@ -33,7 +26,7 @@ function TableCrash(Params,settingData,AddData){
     }
     }
   }
-  if(Params.Excel && Params.SearchFooter && Params.ButtonAddData){
+  if(Params.Excel && Params.SearchFooter && Params.ButtonAddData && Params.Pdf){
     configParam = {
     dom: 'Bfrtip',
     buttons : {
@@ -53,6 +46,11 @@ function TableCrash(Params,settingData,AddData){
 ExportExcelTable(Params.id,'Export Excel.xlsx');
 
   }
+  },
+  {
+    extend : 'pdf',
+    text:'Export PDF',
+    className : 'btn btn-outline-danger',
   },
     {
       text:'Add Data',
@@ -164,6 +162,27 @@ ExportExcelTable(Params.id,'Export Excel.xlsx');
   }
     ]
   }
+};
+}else if(Params.Pdf){
+  configParam = {
+  dom: 'Bfrtip',
+  buttons : {
+
+    dom : {
+      button:{
+        className:'btn'
+      }
+    }
+  ,
+buttons: [
+{
+  extend : 'pdf'
+  text:'Export PDF',
+  className : 'btn btn-outline-danger',
+
+}
+  ]
+}
 };
 }else if (Params.SearchFooter) {
     configParam = {initComplete: function () {
