@@ -176,7 +176,7 @@ ExportExcelTable(Params.id,'Export Excel.xlsx');
   ,
 buttons: [
 {
-  extend : 'pdf'
+  extend : 'pdf',
   text:'Export PDF',
   className : 'btn btn-outline-danger',
 
