@@ -1,4 +1,4 @@
-## 🚀 Semoga Memudahkan Kalian ^_^
+## 🚀 CrashDataTable
 CRUD dengan DataTable Lebih Cepat
 
 
