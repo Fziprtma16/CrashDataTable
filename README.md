@@ -121,6 +121,7 @@ $( document ).ready(function() {
 var tablerrrr = TableCrash({
 id: "table-dr", //ID TABLE
 Excel: true, // BUTTON EXCEL
+Pdf : true,  //BUTTON PDF
 SearchFooter: true, //SEARCH FOOTER
 ResizeTable:true, //RESIZE TABLE
 ShortTable : true, //SHORT TABLE
