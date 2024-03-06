@@ -178,7 +178,7 @@ Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
 
 ```json
   {
-      paramsparameters : "Nama Parameters Data Yang Anda Akan Edit",
+      parameters : "Nama Parameters Data Yang Anda Akan Edit",
       value : "Value Data Yang Anda Update",
       code : "Code Parameter 'Where' Pada Saat Edit"
   }
