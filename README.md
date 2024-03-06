@@ -120,18 +120,17 @@ $( document ).ready(function() {
 ```javascript
 var tablerrrr = TableCrash({
 id: "table-dr", //ID TABLE
-Excel: true, // BUTTON EXCEL
-Pdf : true,  //BUTTON PDF
+button : true, //BUTTON TRUE , EXCEL , PDF DAN ADD DATA
 SearchFooter: true, //SEARCH FOOTER
 ResizeTable:true, //RESIZE TABLE
 ShortTable : true, //SHORT TABLE
 ShortingRow : 0, //SELECT SHORT ROW
 TypeShorting :"asc", //TYPE SHOR , DESC OR ASC
-ButtonAddData : true, //BUTTON ADD DATA
 TotalFormadd : 4, // TOTAL FORM,
 FixedCloumn : true, //FIXED COLUMN
 StartFixedCloumn :2, //START FIXED COLUMN
-ConfigForm : {Placehorder : [//SETTING PLACEHOLDER
+ConfigForm : { //JIKA SETTING BUTTON TRUE
+Placehorder : [//SETTING PLACEHOLDER
 "Nama Perusahaan",
 "Contact Person",
 "Alamat",
