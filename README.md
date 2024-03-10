@@ -42,11 +42,9 @@ CRUD dengan DataTable Lebih Cepat
 <script src="src/jqueryui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="src/datatable.js"></script>
-<script src="src/fixedcolumn.js" ></script>
 <script src="src/loadingoverlay.js"></script>
 <script src="src/swalert.js"></script>
-<script src="src/tabletoexcel.js"></script>
-<script src="CrashDataTable@V.1.0.js"></script>
+<script src="CrashDataTable1.0.0.js"></script>
 </html>
 ```
 
@@ -118,7 +116,7 @@ $( document ).ready(function() {
 ## Usage/Examples
 
 ```javascript
-var tablerrrr = TableCrash({
+var tablerrrr = $('#table-dt').TableCrash({
 id: "table-dr", //ID TABLE
 button : true, //BUTTON TRUE , EXCEL , PDF DAN ADD DATA
 SearchFooter: true, //SEARCH FOOTER
