@@ -116,7 +116,7 @@ $( document ).ready(function() {
 ## Usage/Examples
 
 ```javascript
-var tablerrrr = $('#table-dt').TableCrash({
+var tablerrrr = $('#table-dt').CrashDataTable({
 id: "table-dr", //ID TABLE
 button : true, //BUTTON TRUE , EXCEL , PDF DAN ADD DATA
 RowGroup : true, //Rows Group
