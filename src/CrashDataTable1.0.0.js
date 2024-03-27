@@ -22,13 +22,6 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
       }
     }
 
-    if (Params.ExportPDF) {
-      ExportDataPDF = {
-        extend : 'pdf',
-        text:'Export PDF',
-        className : 'btn btn-outline-danger',
-      }
-    }
 
     if (Params.RowGroup) {
       RowsGroup = {
@@ -312,7 +305,7 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
     }
   };
   }
-  let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn, ...RowsGroup, ...ExportDataPDF };
+  let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn, ...RowsGroup };
   //console.log(combined);
   return   this.DataTable(combined);
 
