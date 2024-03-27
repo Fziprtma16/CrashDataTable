@@ -119,6 +119,8 @@ $( document ).ready(function() {
 var tablerrrr = $('#table-dt').TableCrash({
 id: "table-dr", //ID TABLE
 button : true, //BUTTON TRUE , EXCEL , PDF DAN ADD DATA
+RowGroup : true, //Rows Group
+GroupsColumn : 1, //Target Kolom 
 SearchFooter: true, //SEARCH FOOTER
 ResizeTable:true, //RESIZE TABLE
 ShortTable : true, //SHORT TABLE
