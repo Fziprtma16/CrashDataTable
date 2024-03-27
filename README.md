@@ -120,7 +120,7 @@ var tablerrrr = $('#table-dt').TableCrash({
 id: "table-dr", //ID TABLE
 button : true, //BUTTON TRUE , EXCEL , PDF DAN ADD DATA
 RowGroup : true, //Rows Group
-GroupsColumn : 1, //Target Kolom 
+GroupsColumn : 1, //Target Kolom
 SearchFooter: true, //SEARCH FOOTER
 ResizeTable:true, //RESIZE TABLE
 ShortTable : true, //SHORT TABLE
@@ -236,6 +236,7 @@ Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
 | ConfigForm | json |
 | FixedCloumn | bolean |
 | StartFixedCloumn | int |
+| RowGroup | bolean |
 | default DataTabale Parameters | default DataTabale Parameters |
 
 
