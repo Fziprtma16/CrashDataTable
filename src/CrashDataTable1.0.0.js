@@ -1,17 +1,10 @@
-function addScript(url) {
-    var script = document.createElement('script');
-    script.type = 'application/javascript';
-    script.src = url;
-    document.head.appendChild(script);
-}
-addScript('https://cdn.jsdelivr.net/gh/Fziprtma16/CrashDataTable@main/src/fixedcolumn.js');
-addScript('https://cdn.jsdelivr.net/gh/Fziprtma16/CrashDataTable@main/src/tabletoexcel.js');
-// Gunakan jQuery
 $.fn.CrashDataTable =  function(Params,settingData,AddData){
     // console.log(settingData);
     const formValues = {};
     var configParam = {};
     var shortData = {};
+    var ExportDataPDF = {};
+    var RowsGroup = {};
     var AddButton = {};
     var FixedCloumn = {};
     var TotalForm = Params.TotalFormadd;
@@ -28,6 +21,42 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
         "aaSorting": [[ Params.ShortingRow,  Params.TypeShorting ]]
       }
     }
+
+    if (Params.ExportPDF) {
+      ExportDataPDF = {
+        extend : 'pdf',
+        text:'Export PDF',
+        className : 'btn btn-outline-danger',
+      }
+    }
+
+    if (Params.RowGroup) {
+      RowsGroup = {
+        columnDefs: [{ visible: false, targets: Params.GroupsColumn }],
+           order: [[Params.GroupsColumn, 'asc']],drawCallback: function (settings) {
+               var api = this.api();
+               var rows = api.rows({ page: 'current' }).nodes();
+               var last = null;
+
+               api.column(Params.GroupsColumn, { page: 'current' })
+                   .data()
+                   .each(function (group, i) {
+                       if (last !== group) {
+                           $(rows)
+                               .eq(i)
+                               .before(
+                                   '<tr class="group bg-success text-dark" data-f-color="f9f9f9" data-fill-color="000000" ><td colspan="6">' +
+                                       group +
+                                       '</td></tr>'
+                               );
+
+                           last = group;
+                       }
+                   });
+           }
+      }
+    }
+
     if(Params.FixedCloumn){
       FixedCloumn={
         fixedColumns: {
@@ -283,8 +312,8 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
     }
   };
   }
-  let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn };
-  console.log(combined);
+  let combined = { ...configParam, ...settingData, ...shortData, ...AddButton, ...FixedCloumn, ...RowsGroup, ...ExportDataPDF };
+  //console.log(combined);
   return   this.DataTable(combined);
 
   }
@@ -544,7 +573,7 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
                 newData["value"] = input.value;
                 newData["parameters"] = parameters;
                 newData["code"] = Kode;
-                  updateField(Kode,_id,urlEdit,newData,parameters, (err) => {
+                  updateField__(Kode,_id,urlEdit,newData,parameters, (err) => {
                     if (err)   Swal.fire({
                         title: err,
                         text: "",
@@ -572,7 +601,7 @@ $.fn.CrashDataTable =  function(Params,settingData,AddData){
     });
   }
 
-  const updateField = (kodeprod,id,url,data,parameters,callback) =>{
+  const updateField__ = (kodeprod,id,url,data,parameters,callback) =>{
     console.log(data);
     if (parameters == "") {
       Swal.fire({
