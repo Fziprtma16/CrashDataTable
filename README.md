@@ -87,28 +87,6 @@ Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
   }
 ```
 
-## Parameters
-
-| Parameters             | Type                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| id | String |
-| Button | bolean |
-| SearchFooter | bolean |
-| ResizeTable | bolean |
-| ShortTable | bolean |
-| ShortingRow | int |
-| TypeShorting | string |
-| TotalFormadd | int |
-| ConfigForm | json |
-| FixedCloumn | bolean |
-| StartFixedCloumn | int |
-| RowGroup | bolean |
-| default DataTabale Parameters | default DataTabale Parameters |
-
-
-
-
-
 
 
 ## Usage
