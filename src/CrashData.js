@@ -6,13 +6,169 @@ $.fn.CrashDataTable = function(e, t, a) {
     var s = {};
     var i = {};
     var d = {};
+    var CbTables = {};
+    var ConfBExcel = {};
+    var ConfBPdf = {};
+    var ConfBAddData = {};
+    var ConfCopyData = {};
+    var ICS = {};
     var c = e.TotalFormadd;
     var u = e.ConfigForm;
     var m = e.StartFixedCloumn;
-    console.log(u);
+    var ConfB = e.ConfigButton;
+    var ConfRowspan = e.GroupRowSpan;
+    var IC = e.InfiniteScroll;
+    var ConfInfinite = e.InfiniteConfig;
+    var WPT = e.WordBreakTable;
+
+    if(WPT){    
+        var v = 'table#custom-table tbody td {word-break: break-word;vertical-align: top;}';
+         AStyleTable(v);
+    }
+    if(IC){
+    ICS = {
+        serverSide:true,
+        processing:true,
+        scroller: {
+            loadingIndicator: true
+        },
+        scrollY:200,
+        deferRender:true,
+        ajax : {
+          url : ConfInfinite.DataAjax,
+          type: 'get',
+          dataSrc : function(data){
+            // console.log(data);
+            $("#query").html('').append(data.query);
+             return data.aaData;
+          },
+          columns:ConfInfinite.ColoumnData
+        }
+    }
+    }
+
+    if(e.ButtonHeader){
+       
+        if (ConfB.Excel) {
+            ConfBExcel = {
+                text: "Export Excel",
+                    className: "btn btn-outline-success",
+                    action: function() {
+                        ExportExcelTable(e.id, "Export Excel.xlsx")
+                    }
+            }
+        }
+
+        if(ConfB.Copy){
+            ConfCopyData = {
+                text: "Copy Data",
+                    className: "btn btn-outline-info",
+                    action: function() {
+                        var urlField = document.getElementById(e.id)   
+                        var range = document.createRange()
+                        range.selectNode(urlField)
+                        window.getSelection().addRange(range) 
+                        document.execCommand('copy');
+                        Swal.fire({
+                            title: "Copy Data",
+                            text: "Silahkan Paste Data",
+                            icon: "success"
+                        });
+
+                    }
+            }
+        }
+
+        if(ConfB.Pdf){
+            ConfBPdf = {
+                text: "Export PDF",
+                className: "btn btn-outline-danger",
+                action : function(){
+                    var doc = new jsPDF()
+                    doc.autoTable({
+                        html: $('#'+e.id).get(0),
+                        headStyles: {
+                          halign: "center",
+                          valign: "middle",      
+                        },
+                        bodyStyles: {
+                          halign: "center",
+                        },
+                        margin: {
+                          top: 30
+                        }
+                      });
+                    // doc.autoTable({ html: '#'+e.id })
+                    doc.save('Export PDF.pdf')
+                }
+            }
+        }
+
+        if(ConfB.AddData){
+            ConfBAddData = {
+                text: "Add Data",
+                className: "btn btn-outline-primary",
+                action: function(e, t, a, n) {
+                    console.log(e);
+                    var l = "Add Data";
+                    var r = "";
+                    for (let e = 0; e < c; e++) {
+                        placeholder = u.Placehorder[e];
+                        idForm = u.id[e];
+                        r = r + '<div class="col-lg-12">' + '<input class="form-control" placeholder="' + placeholder + '" id="' + idForm + e + '">' + "</div><br> "
+                    }
+                    new Modal(l, r, "Close", "Confirm", (() => {
+                        const e = u.UrlLinkEnd;
+                        const t = u.urlLoad;
+                        const a = u.idDivCall;
+                        for (let e = 0; e < c; e++) {
+                            const t = u.id[e];
+                            const a = u.Placehorder[e];
+                            const n = document.getElementById(t + e).value;
+                            o[t] = n
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: e,
+                            data: o
+                        }).success((function(e) {
+                            Swal.fire({
+                                title: "Berhasil!",
+                                text: "Anda Berhasil Input Data",
+                                icon: "success"
+                            });
+                            for (let e = 0; e < c; e++) {
+                                const t = u.id[e];
+                                const a = u.Placehorder[e];
+                                const n = document.getElementById(t + e).value = "";
+                                o[t] = n
+                            }
+                            DeleteModal();
+                            LoadData(t, a)
+                        }))
+                    })).show()
+                }
+            }
+        }
+       
+        CbTables = {
+            dom: "Bfrtip",
+            buttons: {
+                dom: {
+                    button: {
+                        className: "btn"
+                    }
+                },
+                buttons: [ConfBExcel,ConfBPdf,ConfCopyData,ConfBAddData ]
+            }  
+        }
+    }
+
+
     if (e.ResizeTable) {
         ResizeTable(e.id)
     }
+
     if (e.ShortTable) {
         l = {
             iDisplayLength: -1,
@@ -21,14 +177,55 @@ $.fn.CrashDataTable = function(e, t, a) {
             ]
         }
     }
+
     if (e.RowGroup) {
+      
+        var ConfGroup = e.ConfigGroup;
+       // console.log(e.ConfigGroup.GroupsColumn);
+       if(ConfGroup.DropdownGroup){
         s = {
             columnDefs: [{
                 visible: false,
-                targets: e.GroupsColumn
+                targets: ConfGroup.GroupsColumn
             }],
             order: [
-                [e.GroupsColumn, "asc"]
+                [ConfGroup.GroupsColumn, "asc"]
+            ],
+            rowGroup: {
+                // Uses the 'row group' plugin
+                dataSrc: ConfGroup.GroupsColumn,
+                startRender: function(rows, group) {
+                  var collapsed = !!collapsedGroups[group];
+                  
+                  rows.nodes().each(function(r) {
+                    // console.log(r);
+                    r.style.display = '';
+                    if (collapsed) {
+                      r.style.display = 'none';
+                      svgdata =  '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-plus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /><path d="M15 12h-6" /><path d="M12 9v6" /></svg>';
+
+                    }else{
+                        svgdata =  '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="#ffff"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-square-rounded-minus"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 12h6" /><path d="M12 3c7.2 0 9 1.8 9 9s-1.8 9 -9 9s-9 -1.8 -9 -9s1.8 -9 9 -9z" /></svg>';
+                    }
+                  });
+
+                  return $('<tr/>')
+          .append('<td colspan="'+ConfGroup.GroupRowSpan+'" class="group bg-secondary text-white collapse-crash">'+svgdata+'  '
+           + group + ' (' + rows.count() + ')</td>')
+          .attr('data-name', group)
+          .toggleClass('collapsed', collapsed);
+                }
+                }
+        }
+      
+       }else{
+        s = {
+            columnDefs: [{
+                visible: false,
+                targets: ConfGroup.GroupsColumn
+            }],
+            order: [
+                [ConfGroup.GroupsColumn, "asc"]
             ],
             drawCallback: function(t) {
                 var a = this.api();
@@ -36,17 +233,20 @@ $.fn.CrashDataTable = function(e, t, a) {
                     page: "current"
                 }).nodes();
                 var n = null;
-                a.column(e.GroupsColumn, {
+                a.column(ConfGroup.GroupsColumn, {
                     page: "current"
                 }).data().each((function(e, t) {
                     if (n !== e) {
-                        $(o).eq(t).before('<tr class="group bg-success text-dark" data-f-color="f9f9f9" data-fill-color="000000" ><td colspan="6">' + e + "</td></tr>");
+                        $(o).eq(t).before('<tr class="group bg-secondary text-white" data-f-color="f9f9f9" data-fill-color="000000" ><td style="font-size: 15px;" colspan="'+ConfGroup.GroupRowSpan+'">' + e + "</td></tr>");
                         n = e
                     }
                 }))
             }
         }
+       }
+        
     }
+
     if (e.FixedCloumn) {
         d = {
             fixedColumns: {
@@ -54,6 +254,7 @@ $.fn.CrashDataTable = function(e, t, a) {
             }
         }
     }
+
     if (e.button) {
         n = {
             dom: "Bfrtip",
@@ -70,9 +271,13 @@ $.fn.CrashDataTable = function(e, t, a) {
                         ExportExcelTable(e.id, "Export Excel.xlsx")
                     }
                 }, {
-                    extend: "pdf",
                     text: "Export PDF",
-                    className: "btn btn-outline-danger"
+                    className: "btn btn-outline-danger",
+                    action : function(){
+                        var doc = new jsPDF()
+                        doc.autoTable({ html: '#'+e.id })
+                        doc.save('CrashDataTable.pdf')
+                    }
                 }, {
                     text: "Add Data",
                     className: "btn btn-outline-primary",
@@ -123,7 +328,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                     let e = this;
                     let t = e.footer().textContent;
                     let a = document.createElement("input");
-                    a.classList.add("form-control-sm");
+                    a.classList.add("form-footer");
                     a.style.width = "auto";
                     a.placeholder = t;
                     e.footer().replaceChildren(a);
@@ -163,9 +368,13 @@ $.fn.CrashDataTable = function(e, t, a) {
                     }
                 },
                 buttons: [{
-                    extend: "pdf",
                     text: "Export PDF",
-                    className: "btn btn-outline-danger"
+                    className: "btn btn-outline-danger",
+                    action : function(){
+                        var doc = new jsPDF()
+                        doc.autoTable({ html: '#'+e.id })
+                        doc.save('CrashDataTable.pdf')
+                    }
                 }]
             }
         }
@@ -176,7 +385,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                     let e = this;
                     let t = e.footer().textContent;
                     let a = document.createElement("input");
-                    a.classList.add("form-control-sm");
+                    a.classList.add("form-footer");
                     a.style.width = "auto";
                     a.placeholder = t;
                     e.footer().replaceChildren(a);
@@ -243,10 +452,23 @@ $.fn.CrashDataTable = function(e, t, a) {
         ...l,
         ...i,
         ...d,
-        ...s
+        ...s,
+        ...CbTables,
+        ...ICS
     };
     return this.DataTable(f)
 };
+
+
+function AStyleTable(a){
+    var css = document.createElement('style');
+    css.type = 'text/css';
+    if (css.styleSheet) 
+        css.styleSheet.cssText = a;
+    else 
+        css.appendChild(document.createTextNode(a));
+    document.getElementsByTagName("head")[0].appendChild(css);
+}
 
 function CreateDelete(e) {
     const t = document.getElementById(e);
@@ -258,13 +480,36 @@ function CreateDelete(e) {
     const s = n.querySelector("tr");
     const i = document.createElement("th");
     const d = document.createElement("th");
-    i.textContent = "Action";
-    d.textContent = "Action";
+    i.textContent = "Delete";
+    d.textContent = "";
     r.appendChild(i);
     s.appendChild(d);
     l.forEach(((e, t) => {
         const a = document.createElement("td");
-        a.innerHTML = '<img class="icon-delete" style="width:30px;" id="hapus' + t + '" src="https://cdn-icons-png.flaticon.com/128/10336/10336279.png" />';
+        a.innerHTML = '<svg class="icon-delete" id="hapus' + t + '" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#fa0000"  class="icon icon-tabler icons-tabler-filled icon-tabler-square-rounded-x"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2l.324 .001l.318 .004l.616 .017l.299 .013l.579 .034l.553 .046c4.785 .464 6.732 2.411 7.196 7.196l.046 .553l.034 .579c.005 .098 .01 .198 .013 .299l.017 .616l.005 .642l-.005 .642l-.017 .616l-.013 .299l-.034 .579l-.046 .553c-.464 4.785 -2.411 6.732 -7.196 7.196l-.553 .046l-.579 .034c-.098 .005 -.198 .01 -.299 .013l-.616 .017l-.642 .005l-.642 -.005l-.616 -.017l-.299 -.013l-.579 -.034l-.553 -.046c-4.785 -.464 -6.732 -2.411 -7.196 -7.196l-.046 -.553l-.034 -.579a28.058 28.058 0 0 1 -.013 -.299l-.017 -.616c-.003 -.21 -.005 -.424 -.005 -.642l.001 -.324l.004 -.318l.017 -.616l.013 -.299l.034 -.579l.046 -.553c.464 -4.785 2.411 -6.732 7.196 -7.196l.553 -.046l.579 -.034c.098 -.005 .198 -.01 .299 -.013l.616 -.017c.21 -.003 .424 -.005 .642 -.005zm-1.489 7.14a1 1 0 0 0 -1.218 1.567l1.292 1.293l-1.292 1.293l-.083 .094a1 1 0 0 0 1.497 1.32l1.293 -1.292l1.293 1.292l.094 .083a1 1 0 0 0 1.32 -1.497l-1.292 -1.293l1.292 -1.293l.083 -.094a1 1 0 0 0 -1.497 -1.32l-1.293 1.292l-1.293 -1.292l-.094 -.083z" fill="#fa0000" stroke-width="0" /></svg>'
+        // a.innerHTML = '<img class="icon-delete" style="width:30px;" id="hapus' + t + '" src="https://cdn-icons-png.flaticon.com/128/10336/10336279.png" />';
+        e.appendChild(a)
+    }))
+}
+
+function CreateInfo(e) {
+    const t = document.getElementById(e);
+    const a = t.querySelector("tbody");
+    const o = t.querySelector("thead");
+    const n = t.querySelector("tfoot");
+    const l = a.querySelectorAll("tr");
+    const r = o.querySelector("tr");
+    const s = n.querySelector("tr");
+    const i = document.createElement("th");
+    const d = document.createElement("th");
+    i.textContent = "Detail";
+    d.textContent = "";
+    r.appendChild(i);
+    s.appendChild(d);
+    l.forEach(((e, t) => {
+        const a = document.createElement("td");
+        a.innerHTML = '<svg class="icon-info" id="info' + t + '" xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="#11ff00"  class="icon icon-tabler icons-tabler-filled icon-tabler-info-square-rounded"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 2l.642 .005l.616 .017l.299 .013l.579 .034l.553 .046c4.687 .455 6.65 2.333 7.166 6.906l.03 .29l.046 .553l.041 .727l.006 .15l.017 .617l.005 .642l-.005 .642l-.017 .616l-.013 .299l-.034 .579l-.046 .553c-.455 4.687 -2.333 6.65 -6.906 7.166l-.29 .03l-.553 .046l-.727 .041l-.15 .006l-.617 .017l-.642 .005l-.642 -.005l-.616 -.017l-.299 -.013l-.579 -.034l-.553 -.046c-4.687 -.455 -6.65 -2.333 -7.166 -6.906l-.03 -.29l-.046 -.553l-.041 -.727l-.006 -.15l-.017 -.617l-.004 -.318v-.648l.004 -.318l.017 -.616l.013 -.299l.034 -.579l.046 -.553c.455 -4.687 2.333 -6.65 6.906 -7.166l.29 -.03l.553 -.046l.727 -.041l.15 -.006l.617 -.017c.21 -.003 .424 -.005 .642 -.005zm0 9h-1l-.117 .007a1 1 0 0 0 0 1.986l.117 .007v3l.007 .117a1 1 0 0 0 .876 .876l.117 .007h1l.117 -.007a1 1 0 0 0 .876 -.876l.007 -.117l-.007 -.117a1 1 0 0 0 -.764 -.857l-.112 -.02l-.117 -.006v-3l-.007 -.117a1 1 0 0 0 -.876 -.876l-.117 -.007zm.01 -3l-.127 .007a1 1 0 0 0 0 1.986l.117 .007l.127 -.007a1 1 0 0 0 0 -1.986l-.117 -.007z" /></svg>';
+        // a.innerHTML = '<img class="icon-delete" style="width:30px;" id="hapus' + t + '" src="https://cdn-icons-png.flaticon.com/128/10336/10336279.png" />';
         e.appendChild(a)
     }))
 }
@@ -380,18 +625,35 @@ function ShowDetailTable(e) {
     headerModal = e.header_detail;
     customDetail = e.custom_value;
     valueDetail = e.value_html;
-    $("#" + idTable + " tbody").on("contextmenu", "tr", (function(e) {
-        e.preventDefault();
-        if ($(this).hasClass("selected")) {
-            $(this).removeClass("selected")
-        } else {
-            table.$("tr.selected").removeClass("selected");
-            $(this).addClass("selected");
-            var t = table.rows(".selected").data();
+ 
+      CreateInfo(idTable);
+   $("#" + idTable + " tbody").on("click", "tr svg.icon-info", (function() {
+        // $("#" + idTable + " tbody").on("contextmenu", "tr", (function(e) {
+        // e.preventDefault();
+        // if ($(this).hasClass("selected")) {
+        //     $(this).removeClass("selected")
+        // } else {
+        //     table.$("tr.selected").removeClass("selected");
+        // $(this).addClass("selected-datacrash");
+       
+            var t = table.rows(this.closest("tr")).data();
             var a = "";
+            var d = t.cell(this);
+            console.log(d);
+            // alert( 'Column title clicked on: '+$(title).html() );
             if (t.length >= 1) {
                 for (var o = 0; o < t.length; o++) {
-                    a = a + "<h3>" + t[o][1] + "</h3><h3>" + t[o][2] + "</h3>"
+                   //[1].sTitle
+                    var title = d.context[0].aoColumns;
+                    for (let index = 0; index < title.length; index++) {
+                        const HeaderTitle = title[index].sTitle;
+                        console.log(HeaderTitle)
+
+                        a = a + "<details><summary>"+HeaderTitle+"</summary>  <p>"+t[o][index]+"</p></details>";
+                        // a = a + ""+HeaderTitle+"<h3>" + t[o][index] + "</h3>";
+                    }
+                    
+                   
                 }
             } else {
                 alert("Please select member data.")
@@ -401,7 +663,7 @@ function ShowDetailTable(e) {
             } else {
                 new Modal(headerModal, a, "Close", "Confirm", (() => false)).show()
             }
-        }
+        // }
     }))
 }
 
@@ -445,7 +707,7 @@ function EditTable(e) {
             return false
         }
         if (v.search("<input") === -1) {
-            d.data('<input type="text" class="form-control-sm" id="input' + m + '" value="' + b + '"/>');
+            d.data('<input type="text" class="form-edit" id="input' + m + '" value="' + b + '"/>');
             var y = document.getElementById(`input${m}`);
             y.addEventListener("keyup", (function(e) {
                 if (e.key === "Enter") {
@@ -537,7 +799,7 @@ function DeleteData(e) {
     var r = e.urlLoad;
     var s = e.DivCallback;
     CreateDelete(t);
-    $("#" + e.id + " tbody").on("click", "tr img.icon-delete", (function() {
+    $("#" + e.id + " tbody").on("click", "tr svg.icon-delete", (function() {
         const t = this.closest("tr");
         const o = t.cells[a].textContent;
         console.log(o);
@@ -602,3 +864,62 @@ function ExportExcelTable(e, t) {
         }
     })
 }
+
+
+function GenerateChartCrash(u){
+    var x = u.DataChart;
+    console.log(x.typechart);
+    var chart = Highcharts.chart(u.IdDiv, {
+		data: {
+		},
+		chart: {
+			type: x.typechart
+		},
+		title: {
+			text: u.TitleChart
+		},
+		xAxis: {
+			type: 'category'
+		},
+      series: [
+        {
+          name: x.namedata
+        }
+      ]
+	});
+
+    u.IdTable.on('draw', function () {
+        DrawChartCrash(u.IdTable, chart,x);
+      });
+
+      DrawChartCrash(u.IdTable, chart,x);
+}
+
+function DrawChartCrash(table, chart,param) {
+    // Get the data from the table, converting strings to numbers
+    var data = table
+      .rows({search: 'applied'})
+      .data()
+      .map(function (d) {
+        const b = typeof d[param.value];
+        const p = typeof d[param.data];
+
+        console.log(p);
+        if (b == "string" && p == "string" ) {
+            var k = d[param.data];
+            var v  = d[param.value].replace(',', '')*1;
+            var r = [k,v];
+        }else if(b == "number" && p == "number"){
+            var k = d[param.data]*1;
+            var v  = d[param.value].replace(',', '')*1;
+            var r = [k,v];
+        }
+        console.log(k);
+        // return [d[param.data], d[param.value].replace(',', '')*1]; 
+        return r;
+      })
+      .toArray();
+      
+      console.log(data);
+    chart.series[0].setData(data);
+  }

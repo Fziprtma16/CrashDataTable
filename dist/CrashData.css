@@ -1,14 +1,78 @@
+
 table.dataTable td {
 padding: 8px;
 font-size: 12px;
-
+border : none;
+font-family: Verdana;
 }
 
+.HeaderRowGroupCrash{
+    font-size: 20px;
+}
+
+table.FixedHeader {
+    text-align: left;
+    position: relative;
+    border-collapse: collapse; 
+}
 table.dataTable th {
 padding: 8px;
+font-size: 13px;
 background-color: #e5e8e7;
+border : none;
 }
 
-table.dataTable .odd {
-    background-color: red;
+.dataTables_wrapper  div.row:first-of-type {
+    background-color: gray;
+  }
+
+table.table-fixed-header th{
+    position: sticky;
+    top: 0; /* Don't forget this, required for the stickiness */
 }
+
+input.form-footer{
+    
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(131, 131, 131);
+    color: rgb(255, 255, 255);
+    
+}
+input.form-footer:focus{
+    color: rgb(255, 255, 255);
+    border : none;
+}
+
+input.form-footer::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
+}
+
+input.form-edit{
+    
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(131, 131, 131);
+    color: rgb(255, 255, 255);
+    
+}
+input.form-edit:focus{
+    color: rgb(255, 255, 255);
+    border : none;
+}
+
+input.form-edit::-webkit-input-placeholder{
+    color: rgb(255, 255, 255);
+}
+
+.selected-datacrash{
+    background-color: #000000;
+    color : white;
+}
+
+
+
+
+/* table.dataTable .odd {
+    background-color: red;
+} */
