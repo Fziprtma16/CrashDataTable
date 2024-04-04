@@ -2,23 +2,6 @@
 CRUD dengan DataTable Lebih Cepat
 
 
-## Data Table
-
-![Data Table Screenshot](https://healthsys.my.id/crash/demo%20datatable.png)
-
-## Detail Table
-![Data Table Screenshot](https://healthsys.my.id/crash/detail%20table.png)
-
-## Edit Table
-![Data Table Screenshot](https://healthsys.my.id/crash/edit%20table.png)
-
-## Delete Table
-![Data Table Screenshot](https://healthsys.my.id/crash/delete%20datatable.png)
-
-## Add Table
-![Data Table Screenshot](https://healthsys.my.id/crash/add%20table.png)
-
-
 ## Load Data Content
 
 ```javascript
