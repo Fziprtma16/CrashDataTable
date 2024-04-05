@@ -2,23 +2,6 @@
 CRUD dengan DataTable Lebih Cepat
 
 
-## Data Table
-
-![Data Table Screenshot](https://healthsys.my.id/crash/demo%20datatable.png)
-
-## Detail Table
-![Data Table Screenshot](https://healthsys.my.id/crash/detail%20table.png)
-
-## Edit Table
-![Data Table Screenshot](https://healthsys.my.id/crash/edit%20table.png)
-
-## Delete Table
-![Data Table Screenshot](https://healthsys.my.id/crash/delete%20datatable.png)
-
-## Add Table
-![Data Table Screenshot](https://healthsys.my.id/crash/add%20table.png)
-
-
 ## Load Data Content
 
 ```javascript
@@ -103,28 +86,6 @@ Pada Saat Add Table Variabel End Point Ada Akan Menghasilkan
       id : "Id yang akan anda Hapus"
   }
 ```
-
-## Parameters
-
-| Parameters             | Type                                                                |
-| ----------------- | ------------------------------------------------------------------ |
-| id | String |
-| Button | bolean |
-| SearchFooter | bolean |
-| ResizeTable | bolean |
-| ShortTable | bolean |
-| ShortingRow | int |
-| TypeShorting | string |
-| TotalFormadd | int |
-| ConfigForm | json |
-| FixedCloumn | bolean |
-| StartFixedCloumn | int |
-| RowGroup | bolean |
-| default DataTabale Parameters | default DataTabale Parameters |
-
-
-
-
 
 
 

@@ -22,7 +22,7 @@ background-color: #e5e8e7;
 border : none;
 }
 
-.dataTables_wrapper  div.row:first-of-type {
+  div.row:first-of-type {
     background-color: gray;
   }
 
