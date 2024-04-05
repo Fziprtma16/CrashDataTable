@@ -21,7 +21,7 @@ $.fn.CrashDataTable = function(e, t, a) {
     var ConfInfinite = e.InfiniteConfig;
     var WPT = e.WordBreakTable;
 
-    if(WPT){    
+    if(WPT){
         var v = 'table#custom-table tbody td {word-break: break-word;vertical-align: top;}';
          AStyleTable(v);
     }
@@ -48,7 +48,7 @@ $.fn.CrashDataTable = function(e, t, a) {
     }
 
     if(e.ButtonHeader){
-       
+
         if (ConfB.Excel) {
             ConfBExcel = {
                 text: "Export Excel",
@@ -64,10 +64,10 @@ $.fn.CrashDataTable = function(e, t, a) {
                 text: "Copy Data",
                     className: "btn btn-outline-info",
                     action: function() {
-                        var urlField = document.getElementById(e.id)   
+                        var urlField = document.getElementById(e.id)
                         var range = document.createRange()
                         range.selectNode(urlField)
-                        window.getSelection().addRange(range) 
+                        window.getSelection().addRange(range)
                         document.execCommand('copy');
                         Swal.fire({
                             title: "Copy Data",
@@ -89,7 +89,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                         html: $('#'+e.id).get(0),
                         headStyles: {
                           halign: "center",
-                          valign: "middle",      
+                          valign: "middle",
                         },
                         bodyStyles: {
                           halign: "center",
@@ -150,7 +150,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                 }
             }
         }
-       
+
         CbTables = {
             dom: "Bfrtip",
             buttons: {
@@ -160,7 +160,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                     }
                 },
                 buttons: [ConfBExcel,ConfBPdf,ConfCopyData,ConfBAddData ]
-            }  
+            }
         }
     }
 
@@ -179,7 +179,7 @@ $.fn.CrashDataTable = function(e, t, a) {
     }
 
     if (e.RowGroup) {
-      
+
         var ConfGroup = e.ConfigGroup;
        // console.log(e.ConfigGroup.GroupsColumn);
        if(ConfGroup.DropdownGroup){
@@ -196,7 +196,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                 dataSrc: ConfGroup.GroupsColumn,
                 startRender: function(rows, group) {
                   var collapsed = !!collapsedGroups[group];
-                  
+
                   rows.nodes().each(function(r) {
                     // console.log(r);
                     r.style.display = '';
@@ -217,7 +217,7 @@ $.fn.CrashDataTable = function(e, t, a) {
                 }
                 }
         }
-      
+
        }else{
         s = {
             columnDefs: [{
@@ -244,7 +244,7 @@ $.fn.CrashDataTable = function(e, t, a) {
             }
         }
        }
-        
+
     }
 
     if (e.FixedCloumn) {
@@ -463,9 +463,9 @@ $.fn.CrashDataTable = function(e, t, a) {
 function AStyleTable(a){
     var css = document.createElement('style');
     css.type = 'text/css';
-    if (css.styleSheet) 
+    if (css.styleSheet)
         css.styleSheet.cssText = a;
-    else 
+    else
         css.appendChild(document.createTextNode(a));
     document.getElementsByTagName("head")[0].appendChild(css);
 }
@@ -625,7 +625,7 @@ function ShowDetailTable(e) {
     headerModal = e.header_detail;
     customDetail = e.custom_value;
     valueDetail = e.value_html;
- 
+
       CreateInfo(idTable);
    $("#" + idTable + " tbody").on("click", "tr svg.icon-info", (function() {
         // $("#" + idTable + " tbody").on("contextmenu", "tr", (function(e) {
@@ -635,7 +635,7 @@ function ShowDetailTable(e) {
         // } else {
         //     table.$("tr.selected").removeClass("selected");
         // $(this).addClass("selected-datacrash");
-       
+
             var t = table.rows(this.closest("tr")).data();
             var a = "";
             var d = t.cell(this);
@@ -652,8 +652,8 @@ function ShowDetailTable(e) {
                         a = a + "<details><summary>"+HeaderTitle+"</summary>  <p>"+t[o][index]+"</p></details>";
                         // a = a + ""+HeaderTitle+"<h3>" + t[o][index] + "</h3>";
                     }
-                    
-                   
+
+
                 }
             } else {
                 alert("Please select member data.")
@@ -747,7 +747,7 @@ const updateField__ = (e, t, a, o, n, l) => {
     console.log(o);
     if (n == "") {
         Swal.fire({
-            title: err,
+            title: e,
             text: "",
             type: "Tidak Dapat Mengedit Data !"
         }).then((function(e) {
@@ -915,11 +915,11 @@ function DrawChartCrash(table, chart,param) {
             var r = [k,v];
         }
         console.log(k);
-        // return [d[param.data], d[param.value].replace(',', '')*1]; 
+        // return [d[param.data], d[param.value].replace(',', '')*1];
         return r;
       })
       .toArray();
-      
+
       console.log(data);
     chart.series[0].setData(data);
   }
