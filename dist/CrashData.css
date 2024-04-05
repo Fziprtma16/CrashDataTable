@@ -13,7 +13,7 @@ font-family: Verdana;
 table.FixedHeader {
     text-align: left;
     position: relative;
-    border-collapse: collapse; 
+    border-collapse: collapse;
 }
 table.dataTable th {
 padding: 8px;
@@ -32,12 +32,12 @@ table.table-fixed-header th{
 }
 
 input.form-footer{
-    
+
     border: none;
     border-radius: 3px;
     background-color: rgb(131, 131, 131);
     color: rgb(255, 255, 255);
-    
+
 }
 input.form-footer:focus{
     color: rgb(255, 255, 255);
@@ -49,12 +49,12 @@ input.form-footer::-webkit-input-placeholder{
 }
 
 input.form-edit{
-    
+
     border: none;
     border-radius: 3px;
     background-color: rgb(131, 131, 131);
     color: rgb(255, 255, 255);
-    
+
 }
 input.form-edit:focus{
     color: rgb(255, 255, 255);
