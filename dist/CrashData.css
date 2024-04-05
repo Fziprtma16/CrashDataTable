@@ -22,9 +22,9 @@ background-color: #e5e8e7;
 border : none;
 }
 
-  div.row:first-of-type {
+  /* div.row:first-of-type {
     background-color: gray;
-  }
+  } */
 
 table.table-fixed-header th{
     position: sticky;
