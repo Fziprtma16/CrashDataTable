@@ -718,7 +718,7 @@ function EditTable(e) {
                     a["code"] = p;
                     updateField__(p, m, r, a, t, (e => {
                         if (e) Swal.fire({
-                            title: e,
+                            title: 'Error',
                             text: "",
                             type: "error"
                         }).then((function(e) {
@@ -747,7 +747,7 @@ const updateField__ = (e, t, a, o, n, l) => {
     console.log(o);
     if (n == "") {
         Swal.fire({
-            title: e,
+            title: 'Error',
             text: "",
             type: "Tidak Dapat Mengedit Data !"
         }).then((function(e) {
@@ -784,7 +784,7 @@ function LoadData(e, t) {
                 }
             }))
         } else {
-            $.LoadingOverlay("hide")
+            $.LoadingOverlay("hide");
         }
     }))
 }
