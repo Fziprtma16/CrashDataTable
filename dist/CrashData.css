@@ -1,8 +1,7 @@
-
 table.dataTable td {
 padding: 8px;
 font-size: 12px;
-border : none;
+/* border : none; */
 font-family: Verdana;
 }
 
@@ -19,7 +18,7 @@ table.dataTable th {
 padding: 8px;
 font-size: 13px;
 background-color: #e5e8e7;
-border : none;
+/* border : none; */
 }
 
   /* div.row:first-of-type {
@@ -69,10 +68,3 @@ input.form-edit::-webkit-input-placeholder{
     background-color: #000000;
     color : white;
 }
-
-
-
-
-/* table.dataTable .odd {
-    background-color: red;
-} */
