@@ -1,5 +1,5 @@
 ## 🚀 CrashDataTable
-CRUD dengan DataTable Lebih Cepat
+Tools Modifikasi DataTable Untuk Handle Ribuan Data , CRUD , Styling ,Custom Export PDF Dan Excel 
 
 
 ## Load Data Content
