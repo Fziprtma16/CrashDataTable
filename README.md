@@ -1,6 +1,41 @@
 ## 🚀 CrashDataTable
-Tools Modifikasi DataTable Untuk Handle Ribuan Data , CRUD , Styling ,Custom Export PDF Dan Excel 
+Tools Modifikasi DataTable Untuk Handle Ribuan Data , CRUD , Styling ,Custom Export PDF Dan Excel , Chart Automation
 
+## Init
+
+```javascript
+var tablerrrr = $("#table-dr").CrashDataTable({
+    id: "table-dr", //ID TABLE
+    ButtonHeader : true,
+    ConfigButton : {
+      Excel : true,
+      Pdf:true,
+      AddData : true,
+      Copy : true
+    },
+    SearchFooter: true, //SEARCH FOOTER
+    ResizeTable:true, //RESIZE TABLE
+    ShortTable : true, //SHORT TABLE
+    ShortingRow : 0, //SELECT SHORT ROW
+    TypeShorting :"asc", //TYPE SHOR , DESC OR ASC
+    TotalFormadd : 4, // TOTAL FORM
+    ConfigForm : {
+    Placehorder : [//SETTING PLACEHOLDER
+    "Nama Perusahaan",
+    "Contact Person",
+    "Alamat",
+    "Kota"
+      ],id : [ //SETTING ID
+        "AddName",
+        "AddCp",
+        "AddAlamat",
+        "AddKota"
+      ],UrlLinkEnd : "", //URL END POINT ADD FORM
+      urlLoad:"", //URL LOAD PAGE ADD FORM
+      idDivCall : ""} //URL LOAD DIV ADD FORM
+  },{searching:true});
+
+```
 
 ## Load Data Content
 
